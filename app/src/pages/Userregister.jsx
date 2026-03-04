@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import './User.css'
-
+import "./User.css"
 function UserRegister() {
   const [formData, setFormData] = useState({
     name: "",

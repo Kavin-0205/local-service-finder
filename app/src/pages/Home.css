@@ -1,0 +1,205 @@
+/* ===== Global Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.home {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ================= HERO SECTION ================= */
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 10%;
+  background-color: #f8fafc;
+  gap: 50px;
+}
+
+.hero-text {
+  flex: 1;
+}
+
+.hero-text h1 {
+  font-size: 42px;
+  color: #1e293b;
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  font-size: 16px;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.hero-image {
+  flex: 1;
+  text-align: center;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 10px;
+}
+
+/* ================= ABOUT SECTION ================= */
+
+.about {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 10%;
+  gap: 50px;
+}
+
+.about-image {
+  flex: 1;
+  text-align: center;
+}
+
+.about-image img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 10px;
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-text h2 {
+  font-size: 32px;
+  color: #1e293b;
+  margin-bottom: 20px;
+}
+
+.about-text p {
+  font-size: 15px;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+/* ================= WHY SECTION ================= */
+
+.why {
+  padding: 80px 10%;
+  background-color: #f1f5f9;
+  text-align: center;
+}
+
+.why h2 {
+  font-size: 32px;
+  margin-bottom: 50px;
+  color: #1e293b;
+}
+
+.why-cards {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+.card h3 {
+  margin-bottom: 15px;
+  color: #2563eb;
+}
+
+.card p {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.6;
+}
+
+/* ================= PROVIDER SECTION ================= */
+
+.provider-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 10%;
+  gap: 50px;
+  background-color: #ffffff;
+}
+
+.provider-text {
+  flex: 1;
+}
+
+.provider-text h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #1e293b;
+}
+
+.provider-text p {
+  font-size: 16px;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.provider-image {
+  flex: 1;
+  text-align: center;
+}
+
+.provider-image img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 10px;
+}
+
+/* ================= RESPONSIVE DESIGN ================= */
+
+@media (max-width: 992px) {
+  .hero,
+  .about,
+  .provider-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-text h1 {
+    font-size: 32px;
+  }
+
+  .about-text h2,
+  .why h2,
+  .provider-text h2 {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero,
+  .about,
+  .why,
+  .provider-section {
+    padding: 50px 5%;
+  }
+
+  .card {
+    width: 100%;
+  }
+}
