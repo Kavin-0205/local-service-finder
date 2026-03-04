@@ -1,0 +1,53 @@
+import React, { useState } from "react";
+import axios from "axios";
+import './Provider.css'
+
+function ProviderRegister() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    phone: "",
+    serviceType: "",
+    location: "",
+    experience: ""
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/providers/register",
+        formData
+      );
+      alert(res.data.message);
+    } catch (err) {
+      alert(err.response?.data?.message || "Registration Failed");
+    }
+  };
+
+  return (
+    <div className="register">
+      <form onSubmit={handleSubmit} className="register-form">
+        <h2 className="title">Provider Registration</h2>
+        <div className="input">
+        <input type="text" name="name" placeholder="Full Name" required onChange={handleChange} />
+        <input type="email" name="email" placeholder="Email" required onChange={handleChange} />
+        <input type="password" name="password" placeholder="Password" required onChange={handleChange} />
+        <input type="text" name="phone" placeholder="Phone Number" required onChange={handleChange} />
+
+        <input type="text" name="serviceType" placeholder="Service Type (Plumber, Electrician...)" required onChange={handleChange} />
+        <input type="text" name="location" placeholder="Service Location" required onChange={handleChange} />
+        <input type="number" name="experience" placeholder="Experience (Years)" required onChange={handleChange} />
+        </div>
+        <button type="submit"className="btn">Register</button>
+      </form>
+    </div>
+  );
+}
+
+export default ProviderRegister;
