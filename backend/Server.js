@@ -23,6 +23,17 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
+app.post("/api/logion",async(req,res)=>{
+  const{email,password}=req.body;
+  const found=await User.findOne({email,password});
+  if(!found) return res.status(401).json({message:"Invalid email/password"});
 
+  return res.json({
+    message:"Login success",
+    role:found.role,
+    user:{id:found._id, name: found.name,email:found.email},
+
+  });
+});
 
 app.listen(3000, () => console.log("server running on port 3000"));

@@ -1,67 +1,62 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Login.css";
 
-function Login() {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState("");
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log(email, password);
-    alert("Login Successful");
+    setMsg("");
+
+    const res = await fetch("http://localhost:3000/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setMsg(data.message);
+      return;
+    }
+
+    // save role if you want
+    localStorage.setItem("role", data.role);
+
+    // ✅ redirect by role
+    if (data.role === "user") navigate("/user-dashboard");
+    else navigate("/provider-dashboard");
   };
+
   return (
-    <div className="login-container">
-      <div className="login">
-        <h2>Login</h2>
+    <div style={{ maxWidth: 420, margin: "60px auto" }}>
+      <h2>Login</h2>
 
-        <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label>Email</label><br></br>
-            <input
-              type="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="input-group">
-            <label>Password</label><br></br>
-            <input
-              type="password"
-              placeholder="Enter password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
+      <form onSubmit={handleLogin}>
+        <input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+          type="email"
+          required
+          style={{ width: "100%", padding: 10, marginBottom: 10 }}
+        />
+        <input
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          type="password"
+          required
+          style={{ width: "100%", padding: 10, marginBottom: 10 }}
+        />
+        <button style={{ width: "100%", padding: 10 }}>Sign In</button>
+      </form>
 
-          <button type="submit" className="login-btn">
-            Login
-          </button>
-        </form>
-        <div className="divider">OR</div>
-
-        <div className="register-buttons">
-          <button
-            className="user-btn"
-            onClick={() => navigate("/userregister")}
-          >
-            Register as User
-          </button>
-
-          <button
-            className="provider-btn"
-            onClick={() => navigate("/providerregister")}
-          >
-            Register as Provider
-          </button>
-        </div>
-      </div>
+      {msg && <p style={{ marginTop: 10 }}>{msg}</p>}
     </div>
   );
 }
-
-export default Login;
